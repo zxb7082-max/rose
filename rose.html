@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>الورد للورد</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(180deg, #fbe9ee 0%, #f6d8e4 50%, #f0c9dd 100%);
+    font-family: sans-serif;
+  }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bouquet {
+    position: relative;
+    width: min(78vw, 300px);
+    height: min(58vh, 340px);
+    animation: sway 3.4s ease-in-out infinite;
+    transform-origin: 50% 90%;
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-2.5deg); }
+    50%      { transform: rotate(2.5deg); }
+  }
+
+  .stems-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .flower {
+    position: absolute;
+    width: 17%;
+    aspect-ratio: 1;
+    transform-origin: center;
+    z-index: 2;
+  }
+
+  .petal-group {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    animation: bloom 0.7s ease-out backwards;
+  }
+
+  @keyframes bloom {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  .petal {
+    position: absolute;
+    width: 55%;
+    height: 55%;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+  }
+
+  .center {
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f7c948;
+    z-index: 2;
+  }
+
+  .caption {
+    margin-top: clamp(14px, 3.5vh, 28px);
+    font-size: clamp(22px, 6vw, 34px);
+    color: #9c3d63;
+    font-weight: 500;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1s forwards;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .petal-fall {
+    position: absolute;
+    top: -20px;
+    border-radius: 50% 0 50% 50%;
+    opacity: 0.85;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0%   { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(300deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <div class="bouquet" id="bouquet">
+    <svg class="stems-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="stemGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6fae5b"/>
+          <stop offset="100%" stop-color="#427334"/>
+        </linearGradient>
+      </defs>
+      <path d="M50,88 L50,20"  stroke="#4c8a3f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <path d="M50,88 Q42,55 27,24" stroke="#4c8a3f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M50,88 Q58,55 73,24" stroke="#4c8a3f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M50,88 Q38,60 15,42" stroke="#4c8a3f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M50,88 Q62,60 85,42" stroke="#4c8a3f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+
+      <ellipse cx="40" cy="65" rx="6" ry="3" fill="#5fa04d" transform="rotate(-30 40 65)"/>
+      <ellipse cx="60" cy="65" rx="6" ry="3" fill="#5fa04d" transform="rotate(30 60 65)"/>
+      <ellipse cx="33" cy="78" rx="6" ry="3" fill="#5a9a4a" transform="rotate(-15 33 78)"/>
+      <ellipse cx="67" cy="78" rx="6" ry="3" fill="#5a9a4a" transform="rotate(15 67 78)"/>
+
+      <rect x="41" y="80" width="18" height="12" rx="3" fill="#d94f7a"/>
+      <rect x="41" y="83.5" width="18" height="3.2" fill="#c23d67"/>
+
+      <path d="M50,84 C40,79 32,82 34,88 C36,93 45,90 50,85 Z" fill="#e8608a"/>
+      <path d="M50,84 C60,79 68,82 66,88 C64,93 55,90 50,85 Z" fill="#e8608a"/>
+      <path d="M50,86 L45,97 L50,94 L55,97 Z" fill="#d94f7a"/>
+      <circle cx="50" cy="85" r="2.6" fill="#c23d67"/>
+    </svg>
+
+    <div class="flower" style="left:50%; top:9%; z-index:2;"></div>
+    <div class="flower" style="left:27%; top:20%;"></div>
+    <div class="flower" style="left:73%; top:20%;"></div>
+    <div class="flower" style="left:15%; top:38%;"></div>
+    <div class="flower" style="left:85%; top:38%;"></div>
+  </div>
+  <div class="caption">الورد للورد</div>
+</div>
+
+<script>
+  const bouquet = document.getElementById('bouquet');
+  const stage = document.getElementById('stage');
+  const flowers = bouquet.querySelectorAll('.flower');
+  const petalColors = ['#e8608a', '#f08fb0', '#d94f7a', '#f6a5c0'];
+  const delays = [0.1, 0.25, 0.25, 0.4, 0.4];
+  const scales = [1, 0.85, 0.85, 0.7, 0.7];
+
+  flowers.forEach((flower, i) => {
+    flower.style.transform = `translate(-50%, -50%) scale(${scales[i]})`;
+
+    const group = document.createElement('div');
+    group.className = 'petal-group';
+    group.style.animationDelay = delays[i] + 's';
+
+    const color = petalColors[i % petalColors.length];
+    for (let p = 0; p < 6; p++) {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.background = color;
+      const angle = p * 60;
+      petal.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translate(28%)`;
+      group.appendChild(petal);
+    }
+    const center = document.createElement('div');
+    center.className = 'center';
+    group.appendChild(center);
+
+    flower.appendChild(group);
+  });
+
+  const fallColors = ['#e8608a', '#f08fb0', '#f6a5c0'];
+  for (let i = 0; i < 14; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal-fall';
+    const size = 8 + Math.random() * 6;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.background = fallColors[i % fallColors.length];
+    p.style.animationDuration = (5 + Math.random() * 4) + 's';
+    p.style.animationDelay = (Math.random() * 6) + 's';
+    stage.appendChild(p);
+  }
+</script>
+
+</body>
+</html>
